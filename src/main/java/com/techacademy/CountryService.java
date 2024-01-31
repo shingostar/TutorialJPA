@@ -26,17 +26,12 @@ public class CountryService {
         return "country/list";
     }
 
-    private Object getCountryList() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
-    }
-
     // ----- 追加:ここから -----
     // ----- 詳細画面 -----
     @GetMapping(value = { "/detail", "/detail/{code}/" })
-    public String getCountry(@PathVariable(name = "code", required = false) String code, Model model) {
+    public Country getCountry(@PathVariable(name = "code", required = false) String code, Model model) {
         // codeが指定されていたら検索結果、無ければ空のクラスを設定
-        Country country = code != null ? service.getCountry(code) : new Country();
+        Country country = code != null ? service.getCountry(code, model) : new Country();
         // Modelに登録
         model.addAttribute("country", country);
         // country/detail.htmlに画面遷移
@@ -63,7 +58,7 @@ public class CountryService {
 
     // ----- 削除 -----
     @PostMapping("/delete")
-    public String deleteCountry(@RequestParam("code") String code, Model model) {
+    public String deleteCountry(@RequestParam("code") String code) {
         // 削除
         service.deleteCountry(code);
 
