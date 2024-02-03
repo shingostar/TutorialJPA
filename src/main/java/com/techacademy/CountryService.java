@@ -36,7 +36,7 @@ public class CountryService {
         Country country = new Country(code, name, population);
         repository.save(country);
     }
-    
+     
     // 削除を行なう
     @Transactional
     public void deleteCountry(String code) {

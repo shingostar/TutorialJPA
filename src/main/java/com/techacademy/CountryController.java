@@ -30,7 +30,7 @@ public class CountryController {
     // ----- 追加:ここから -----
     // ----- 詳細画面 -----
     @GetMapping(value = { "/detail","/detail/{code}/" })
-    public void getCountry(@PathVariable(name = "code", required = false) String code, Model model) {
+    public String getCountry(@PathVariable(name = "code", required = false) String code, Model model) {
         // codeが指定されていたら検索結果、なければからのクラスを設定
         Country country = code != null ? service.getCountry(code) : new Country();
         // Modelに登録
@@ -61,11 +61,5 @@ public class CountryController {
     }
     // ----- 追加:ここまで ----- 
     
-    //----- ここから課題の追加-----
-    @GetMapping(value = {"/delete","/delete/{code}/"})
-    public String detailCountryForm(Model model) {
-        // Modelに登録
-        model.addAttribute("country", country);
-        // country/detail.htmlに画面遷移
-        return "country/delete/";
+    
 }
